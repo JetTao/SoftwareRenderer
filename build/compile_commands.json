@@ -1,47 +1,47 @@
 [
 {
   "directory": "D:/CodeDirectory/SoftwareRenderer/build",
-  "command": "\"C:/Program Files/llvm-mingw-20211002-msvcrt-x86_64/bin/clang++.exe\"  @CMakeFiles/SoftwareRenderer.dir/includes_CXX.rsp -g -std=c++17 -o CMakeFiles/SoftwareRenderer.dir/main.cpp.obj -c D:/CodeDirectory/SoftwareRenderer/main.cpp",
+  "command": "\"C:/Program Files/llvm-mingw-20211002-msvcrt-x86_64/bin/clang++.exe\"  @CMakeFiles/SoftwareRenderer.dir/includes_CXX.rsp -O3 -DNDEBUG -std=c++17 -o CMakeFiles/SoftwareRenderer.dir/main.cpp.obj -c D:/CodeDirectory/SoftwareRenderer/main.cpp",
   "file": "D:/CodeDirectory/SoftwareRenderer/main.cpp"
 },
 {
   "directory": "D:/CodeDirectory/SoftwareRenderer/build",
-  "command": "\"C:/Program Files/llvm-mingw-20211002-msvcrt-x86_64/bin/clang++.exe\"  @CMakeFiles/SoftwareRenderer.dir/includes_CXX.rsp -g -std=c++17 -o CMakeFiles/SoftwareRenderer.dir/Core/Source/Camera.cpp.obj -c D:/CodeDirectory/SoftwareRenderer/Core/Source/Camera.cpp",
+  "command": "\"C:/Program Files/llvm-mingw-20211002-msvcrt-x86_64/bin/clang++.exe\"  @CMakeFiles/SoftwareRenderer.dir/includes_CXX.rsp -O3 -DNDEBUG -std=c++17 -o CMakeFiles/SoftwareRenderer.dir/Core/Source/Camera.cpp.obj -c D:/CodeDirectory/SoftwareRenderer/Core/Source/Camera.cpp",
   "file": "D:/CodeDirectory/SoftwareRenderer/Core/Source/Camera.cpp"
 },
 {
   "directory": "D:/CodeDirectory/SoftwareRenderer/build",
-  "command": "\"C:/Program Files/llvm-mingw-20211002-msvcrt-x86_64/bin/clang++.exe\"  @CMakeFiles/SoftwareRenderer.dir/includes_CXX.rsp -g -std=c++17 -o CMakeFiles/SoftwareRenderer.dir/Core/Source/Framebuffer.cpp.obj -c D:/CodeDirectory/SoftwareRenderer/Core/Source/Framebuffer.cpp",
+  "command": "\"C:/Program Files/llvm-mingw-20211002-msvcrt-x86_64/bin/clang++.exe\"  @CMakeFiles/SoftwareRenderer.dir/includes_CXX.rsp -O3 -DNDEBUG -std=c++17 -o CMakeFiles/SoftwareRenderer.dir/Core/Source/Framebuffer.cpp.obj -c D:/CodeDirectory/SoftwareRenderer/Core/Source/Framebuffer.cpp",
   "file": "D:/CodeDirectory/SoftwareRenderer/Core/Source/Framebuffer.cpp"
 },
 {
   "directory": "D:/CodeDirectory/SoftwareRenderer/build",
-  "command": "\"C:/Program Files/llvm-mingw-20211002-msvcrt-x86_64/bin/clang++.exe\"  @CMakeFiles/SoftwareRenderer.dir/includes_CXX.rsp -g -std=c++17 -o CMakeFiles/SoftwareRenderer.dir/Core/Source/HighResolutionClock.cpp.obj -c D:/CodeDirectory/SoftwareRenderer/Core/Source/HighResolutionClock.cpp",
+  "command": "\"C:/Program Files/llvm-mingw-20211002-msvcrt-x86_64/bin/clang++.exe\"  @CMakeFiles/SoftwareRenderer.dir/includes_CXX.rsp -O3 -DNDEBUG -std=c++17 -o CMakeFiles/SoftwareRenderer.dir/Core/Source/HighResolutionClock.cpp.obj -c D:/CodeDirectory/SoftwareRenderer/Core/Source/HighResolutionClock.cpp",
   "file": "D:/CodeDirectory/SoftwareRenderer/Core/Source/HighResolutionClock.cpp"
 },
 {
   "directory": "D:/CodeDirectory/SoftwareRenderer/build",
-  "command": "\"C:/Program Files/llvm-mingw-20211002-msvcrt-x86_64/bin/clang++.exe\"  @CMakeFiles/SoftwareRenderer.dir/includes_CXX.rsp -g -std=c++17 -o CMakeFiles/SoftwareRenderer.dir/Core/Source/Mesh.cpp.obj -c D:/CodeDirectory/SoftwareRenderer/Core/Source/Mesh.cpp",
+  "command": "\"C:/Program Files/llvm-mingw-20211002-msvcrt-x86_64/bin/clang++.exe\"  @CMakeFiles/SoftwareRenderer.dir/includes_CXX.rsp -O3 -DNDEBUG -std=c++17 -o CMakeFiles/SoftwareRenderer.dir/Core/Source/Mesh.cpp.obj -c D:/CodeDirectory/SoftwareRenderer/Core/Source/Mesh.cpp",
   "file": "D:/CodeDirectory/SoftwareRenderer/Core/Source/Mesh.cpp"
 },
 {
   "directory": "D:/CodeDirectory/SoftwareRenderer/build",
-  "command": "\"C:/Program Files/llvm-mingw-20211002-msvcrt-x86_64/bin/clang++.exe\"  @CMakeFiles/SoftwareRenderer.dir/includes_CXX.rsp -g -std=c++17 -o CMakeFiles/SoftwareRenderer.dir/Core/Source/Model.cpp.obj -c D:/CodeDirectory/SoftwareRenderer/Core/Source/Model.cpp",
+  "command": "\"C:/Program Files/llvm-mingw-20211002-msvcrt-x86_64/bin/clang++.exe\"  @CMakeFiles/SoftwareRenderer.dir/includes_CXX.rsp -O3 -DNDEBUG -std=c++17 -o CMakeFiles/SoftwareRenderer.dir/Core/Source/Model.cpp.obj -c D:/CodeDirectory/SoftwareRenderer/Core/Source/Model.cpp",
   "file": "D:/CodeDirectory/SoftwareRenderer/Core/Source/Model.cpp"
 },
 {
   "directory": "D:/CodeDirectory/SoftwareRenderer/build",
-  "command": "\"C:/Program Files/llvm-mingw-20211002-msvcrt-x86_64/bin/clang++.exe\"  @CMakeFiles/SoftwareRenderer.dir/includes_CXX.rsp -g -std=c++17 -o CMakeFiles/SoftwareRenderer.dir/Core/Source/Renderer.cpp.obj -c D:/CodeDirectory/SoftwareRenderer/Core/Source/Renderer.cpp",
+  "command": "\"C:/Program Files/llvm-mingw-20211002-msvcrt-x86_64/bin/clang++.exe\"  @CMakeFiles/SoftwareRenderer.dir/includes_CXX.rsp -O3 -DNDEBUG -std=c++17 -o CMakeFiles/SoftwareRenderer.dir/Core/Source/Renderer.cpp.obj -c D:/CodeDirectory/SoftwareRenderer/Core/Source/Renderer.cpp",
   "file": "D:/CodeDirectory/SoftwareRenderer/Core/Source/Renderer.cpp"
 },
 {
   "directory": "D:/CodeDirectory/SoftwareRenderer/build",
-  "command": "\"C:/Program Files/llvm-mingw-20211002-msvcrt-x86_64/bin/clang++.exe\"  @CMakeFiles/SoftwareRenderer.dir/includes_CXX.rsp -g -std=c++17 -o CMakeFiles/SoftwareRenderer.dir/Core/Source/Texture.cpp.obj -c D:/CodeDirectory/SoftwareRenderer/Core/Source/Texture.cpp",
+  "command": "\"C:/Program Files/llvm-mingw-20211002-msvcrt-x86_64/bin/clang++.exe\"  @CMakeFiles/SoftwareRenderer.dir/includes_CXX.rsp -O3 -DNDEBUG -std=c++17 -o CMakeFiles/SoftwareRenderer.dir/Core/Source/Texture.cpp.obj -c D:/CodeDirectory/SoftwareRenderer/Core/Source/Texture.cpp",
   "file": "D:/CodeDirectory/SoftwareRenderer/Core/Source/Texture.cpp"
 },
 {
   "directory": "D:/CodeDirectory/SoftwareRenderer/build",
-  "command": "\"C:/Program Files/llvm-mingw-20211002-msvcrt-x86_64/bin/clang++.exe\"  @CMakeFiles/SoftwareRenderer.dir/includes_CXX.rsp -g -std=c++17 -o CMakeFiles/SoftwareRenderer.dir/Core/Source/Window.cpp.obj -c D:/CodeDirectory/SoftwareRenderer/Core/Source/Window.cpp",
+  "command": "\"C:/Program Files/llvm-mingw-20211002-msvcrt-x86_64/bin/clang++.exe\"  @CMakeFiles/SoftwareRenderer.dir/includes_CXX.rsp -O3 -DNDEBUG -std=c++17 -o CMakeFiles/SoftwareRenderer.dir/Core/Source/Window.cpp.obj -c D:/CodeDirectory/SoftwareRenderer/Core/Source/Window.cpp",
   "file": "D:/CodeDirectory/SoftwareRenderer/Core/Source/Window.cpp"
 }
 ]

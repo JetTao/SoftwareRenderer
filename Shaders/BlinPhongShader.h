@@ -25,9 +25,9 @@ public:
     struct Light
     {
         Point3f Position;
-        Vec3f Ambient;
-        Vec3f Diffuse;
-        Vec3f Specular;
+        Vec3f   Ambient;
+        Vec3f   Diffuse;
+        Vec3f   Specular;
     };
 
     Vertex& VertexShader(Vertex& in)
@@ -39,29 +39,33 @@ public:
     
     Color4f FragmentShader(Fragment& in)
     {
-        /*Color3f ambient{ 0.1f, 0.1f, 0.1f };
+        Color3f ambient{ 0.8f, 0.3f, 0.3f };
 
-        Vec3f normal = Normalize(in.Normal);
+        /*Vec3f normal = Normalize(mpNormalMap->GetTexel(in.TexCoord));
         Vec3f lightDirection = Normalize(mLight.Position - in.Position);
-        auto alpha = Dot(normal, lightDirection);
-        float lightStrength = Max(alpha , 0.0f);
+        float lightStrength = Max( Dot(normal, lightDirection), 0.0f );
 
-        Color3f diffuse = mLight.Diffuse * mpDiffuseMap->GetTexel(in.TexCoord) 
-            *lightStrength;
+        Color3f diffuse = mLight.Diffuse;
+            diffuse = diffuse * mpDiffuseMap->GetTexel(in.TexCoord);
+        diffuse = diffuse * lightStrength;
 
         auto halfDirection = Normalize(lightDirection + mViewDirection);
-        auto beta = Dot(normal, halfDirection);
-        float exp = std::pow( Max(beta, 0.0f ), 32.0f );
+        float exp = std::pow( Max( Dot(normal, halfDirection ), 0.0f ), 32.0f );
 
         Vec3f specular = Vec3f{ 0.3f, 0.3f, 0.3f } * exp * 
-            mpSpecularMap->GetTexel(in.TexCoord);
-        */
+            mpSpecularMap->GetTexel(in.TexCoord);*/
+        
+        
+
+        return Color4f{ mpDiffuseMap->GetTexel(in.TexCoord), 1.0f };
+
+        //return Color4f{ ambient + diffuse , 1.0f };
 
         //return Color4f{ ambient + diffuse + specular, 1.0f };
 
-        return Color4f{ mpDiffuseMap->GetTexel(in.TexCoord), 0.0f};
+        // return Color4f{ 1.0f };
 
-        return Color4f{ 1.0f };
+
 
     }
 
@@ -111,7 +115,11 @@ private:
 
     std::shared_ptr<Texture> mpSpecularMap;
 
-    
+// public: 
+
+//     Texture Diffuse;
+//     Texture Normal;
+//     Texture Specular;
 };
 
 

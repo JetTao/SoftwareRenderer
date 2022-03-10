@@ -304,7 +304,7 @@ CMakeFiles/SoftwareRenderer.dir/Core/Source/Texture.cpp.obj: \
   C:\Program\ Files\llvm-mingw-20211002-msvcrt-x86_64\include\c++\v1\iomanip \
   C:\Program\ Files\llvm-mingw-20211002-msvcrt-x86_64\include\c++\v1\vector \
   C:\Program\ Files\llvm-mingw-20211002-msvcrt-x86_64\include\c++\v1\__split_buffer \
-  D:\CodeDirectory\SoftwareRenderer\Core\Source\..\Include\RGBAColor.h \
+  D:\CodeDirectory\SoftwareRenderer\Core\Source\..\Include\ARGB.h \
   D:\CodeDirectory\SoftwareRenderer\Parser\stb_image.h \
   C:\Program\ Files\llvm-mingw-20211002-msvcrt-x86_64\lib\clang\13.0.0\include\emmintrin.h \
   C:\Program\ Files\llvm-mingw-20211002-msvcrt-x86_64\lib\clang\13.0.0\include\xmmintrin.h \

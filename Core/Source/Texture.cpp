@@ -1,5 +1,5 @@
 #include "../Include/Texture.h"
-#include "../Include/RGBAColor.h"
+#include "../Include/ARGB.h"
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
@@ -29,6 +29,7 @@ void Texture::LoadTextureFromString(const std::string& filename)
                 mData[3 * index + 0] = pData[3 * index + 0] / 255.0f;
                 mData[3 * index + 1] = pData[3 * index + 1] / 255.0f;
                 mData[3 * index + 2] = pData[3 * index + 2] / 255.0f;
+
             }
         }
 
@@ -37,7 +38,7 @@ void Texture::LoadTextureFromString(const std::string& filename)
 
 }
 
-Color3f Texture::GetTexel(const Vec2f& texcoord)
+const Color3f Texture::GetTexel(const Vec2f& texcoord) const
 {
     auto uInt = static_cast<uint32_t>(texcoord.u * (mWidth - 1) + 0.5f);
     auto vInt = static_cast<uint32_t>(texcoord.v * (mHeight - 1) + 0.5f);

@@ -318,13 +318,13 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="D:\CodeDirectory\SoftwareRenderer\main.cpp" />
+    <ClInclude Include="D:\CodeDirectory\SoftwareRenderer\Core\Include\ARGB.h" />
     <ClInclude Include="D:\CodeDirectory\SoftwareRenderer\Core\Include\Camera.h" />
     <ClInclude Include="D:\CodeDirectory\SoftwareRenderer\Core\Include\Framebuffer.h" />
     <ClInclude Include="D:\CodeDirectory\SoftwareRenderer\Core\Include\HighResolutionClock.h" />
     <ClInclude Include="D:\CodeDirectory\SoftwareRenderer\Core\Include\Math.hpp" />
     <ClInclude Include="D:\CodeDirectory\SoftwareRenderer\Core\Include\Mesh.h" />
     <ClInclude Include="D:\CodeDirectory\SoftwareRenderer\Core\Include\Model.h" />
-    <ClInclude Include="D:\CodeDirectory\SoftwareRenderer\Core\Include\RGBAColor.h" />
     <ClInclude Include="D:\CodeDirectory\SoftwareRenderer\Core\Include\Renderer.h" />
     <ClInclude Include="D:\CodeDirectory\SoftwareRenderer\Core\Include\Texture.h" />
     <ClInclude Include="D:\CodeDirectory\SoftwareRenderer\Core\Include\Vertex.h" />

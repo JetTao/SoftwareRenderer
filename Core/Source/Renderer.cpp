@@ -1,5 +1,5 @@
 #include "../Include/Renderer.h"
-#include "../Include/RGBAColor.h"
+#include "../Include/ARGB.h"
 #include "../Include/Window.h"
 
 #include <memory>
@@ -12,7 +12,7 @@
 void Renderer::LoadScene(void)
 {
     
-    fs::path crabPath = mProjectPath / "Scenes/crab/crab.obj";
+    fs::path crabPath = mProjectPath / "Scenes/back_pack/back_pack.obj";
     auto pCrabModel = std::make_shared<Model>(crabPath);
 
     mModels["crab"] = pCrabModel;
@@ -59,8 +59,9 @@ void Renderer::OnUpdate()
 void Renderer::OnRender()
 {
     DrawModel(mModels["crab"]);
+
     
-    
+    mpWindow->SwapColorBuffer(mFramebuffer.GetColorBuffer());
     mpWindow->UpdateWindowColor();
     mFramebuffer.Reset();
 }
@@ -128,6 +129,26 @@ void Renderer::OnMouseMoveInput()
 
 void Renderer::DrawModel(std::shared_ptr<Model> pModel)
 {
+    //auto data = pModel->GetDiffuse()->GetData();
+    //for (auto i = 0; i < 800; i++)
+    //{
+    //    for (auto j = 0; j < 800; j++)
+    //    {
+    //        auto index = j * 800 + i;
+
+    //        Color4f color3;
+
+    //        color3.r = data[3 * index + 0];
+    //        color3.g = data[3 * index + 1];
+    //        color3.b = data[3 * index + 2];
+    //        color3.a = 1.0f;
+
+    //        auto argbColor = Color4fToARGB(color3);
+    //        argbColor.a = 255;
+
+    //        DrawPixel(i, j, argbColor);
+    //    }
+    //}
 
     Mat4f model     { Mat4f::GetIdentity() };        
     Mat4f projection{ mCamera.GetPerspectiveMatrix() };
@@ -154,8 +175,11 @@ void Renderer::DrawModel(std::shared_ptr<Model> pModel)
     pShader->SetDiffuseMap(pModel->GetDiffuse());
     pShader->SetNormalMap(pModel->GetNormal());
     pShader->SetSpecularMap(pModel->GetSpecular());
+
+    /*pShader->Diffuse = pModel->Diffuse;
+    pShader->Normal = pModel->Normal;
+    pShader->Specular = pModel->Specular;*/
     
-    pModel->SetShader(pShader);
     auto pMesh = pModel->GetMesh();
     for (int i = 0; i < pMesh->GetNumIndices(); i += 3)
     {
@@ -165,11 +189,8 @@ void Renderer::DrawModel(std::shared_ptr<Model> pModel)
             vertices[j].Position = pMesh->GetPosition(pMesh->GetIndex(i + j).VertexIndex);
             vertices[j].TexCoord = pMesh->GetTexCoord(pMesh->GetIndex(i + j).TexCoordIndex);
             vertices[j].Normal   = pMesh->GetNormal(pMesh->GetIndex(i + j).NormalIndex);
-            if (vertices[j].TexCoord.u > 1.0f || vertices[j].TexCoord.v > 1.0f)
-            {
-                std::cout << vertices[j].TexCoord << std::endl;
-            }
         }
+
         if (CullBackface(
             vertices[0].Position,
             vertices[1].Position,
@@ -192,15 +213,14 @@ void Renderer::DrawModel(std::shared_ptr<Model> pModel)
 
     }
 
-     mpWindow->SwapColorBuffer(mFramebuffer.GetColorBuffer());
 }
 
-void Renderer::DrawPixel(uint32_t x, uint32_t y, const RGBAColor &color)
+void Renderer::DrawPixel(uint32_t x, uint32_t y, const ARGB &color)
 {
-    mFramebuffer.SetColor(x, y, color.rgba);
+    mFramebuffer.SetColor(x, y, color.argb);
 }
 
-void Renderer::DrawLine(Point2f t0, Point2f point1, const RGBAColor &color)
+void Renderer::DrawLine(Point2f t0, Point2f point1, const ARGB &color)
 {  
     bool steep = false;
     if (std::abs(t0.x - point1.x) < std::abs(t0.y - point1.y)) {
@@ -319,9 +339,7 @@ void Renderer::DrawTriangle(
                     fragment.TexCoord = texCoord;
 
                     auto pixelColor = pShader->FragmentShader(fragment);
-                    RGBAColor color = Color4fToRGBA(pixelColor);
-
-                    color.a = 0;
+                    ARGB color = Color4fToARGB(pixelColor);
 
                     DrawPixel(x, y, color);
                 }
@@ -334,7 +352,7 @@ void Renderer::DrawWireFrameTriangle(
     const Point3f& point0,
     const Point3f& point1,
     const Point3f& point2,
-    const RGBAColor& color)
+    const ARGB& color)
 {
     DrawLine(Point2f{ point0.x, point0.y }, Point2f{ point1.x, point1.y }, color);
     DrawLine(Point2f{ point1.x, point1.y }, Point2f{ point2.x, point2.y }, color);

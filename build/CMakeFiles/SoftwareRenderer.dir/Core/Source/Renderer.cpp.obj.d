@@ -325,7 +325,7 @@ CMakeFiles/SoftwareRenderer.dir/Core/Source/Renderer.cpp.obj: \
   C:\Program\ Files\llvm-mingw-20211002-msvcrt-x86_64\include\c++\v1\__hash_table \
   C:\Program\ Files\llvm-mingw-20211002-msvcrt-x86_64\include\c++\v1\__node_handle \
   C:\Program\ Files\llvm-mingw-20211002-msvcrt-x86_64\include\c++\v1\optional \
-  D:\CodeDirectory\SoftwareRenderer\Core\Source\..\Include\RGBAColor.h \
+  D:\CodeDirectory\SoftwareRenderer\Core\Source\..\Include\ARGB.h \
   D:\CodeDirectory\SoftwareRenderer\Core\Source\..\Include\Window.h \
   C:\Program\ Files\llvm-mingw-20211002-msvcrt-x86_64\include\windows.h \
   C:\Program\ Files\llvm-mingw-20211002-msvcrt-x86_64\include\sdkddkver.h \

@@ -30,6 +30,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="D:\CodeDirectory\SoftwareRenderer\Core\Include\ARGB.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="D:\CodeDirectory\SoftwareRenderer\Core\Include\Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -46,9 +49,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="D:\CodeDirectory\SoftwareRenderer\Core\Include\Model.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="D:\CodeDirectory\SoftwareRenderer\Core\Include\RGBAColor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="D:\CodeDirectory\SoftwareRenderer\Core\Include\Renderer.h">

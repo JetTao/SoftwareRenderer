@@ -61,4 +61,12 @@ private:
 
 	std::shared_ptr<BlinPhongShader> mpShader{ nullptr };
 
+public: 
+
+	// Texture Diffuse;
+
+	// Texture Normal;
+
+	// Texture Specular;
+
 };

@@ -14,7 +14,7 @@ public:
 
     void LoadTextureFromString(const std::string& filename);
 
-    Color3f GetTexel(const Vec2f& texcoord);
+    const Color3f GetTexel(const Vec2f& texcoord) const;
 
     inline uint32_t GetWidth() const
     {
@@ -26,10 +26,10 @@ public:
         return mHeight;
     }
 
-    // inline std::vector<uint8_t> GetData() const
-    // {
-    //     return mData;
-    // }
+    inline std::vector<float> GetData() const
+    {
+        return mData;
+    }
 
 private:
 

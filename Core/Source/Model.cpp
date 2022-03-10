@@ -23,6 +23,7 @@ bool Model::LoadModelFromPath(const fs::path& path)
     if (fs::exists(diffusePath))
     {
         mpDiffuseMap = std::make_shared<Texture>(diffusePath.string());
+        // Diffuse.LoadTextureFromString(diffusePath.string());
         std::cout << "Succeed to load diffuse map! " << std::endl;
     }
     else 
@@ -34,6 +35,7 @@ bool Model::LoadModelFromPath(const fs::path& path)
     if (fs::exists(normalPath))
     {
         mpNormalMap = std::make_shared<Texture>(normalPath.string());
+        // Normal.LoadTextureFromString(normalPath.string());
         std::cout << "Succeed to load normal map! " << std::endl;
     }
     else
@@ -45,14 +47,13 @@ bool Model::LoadModelFromPath(const fs::path& path)
     if (fs::exists(specularPath))
     {
         mpSpecularMap = std::make_shared<Texture>(specularPath.string());
+        // Specular.LoadTextureFromString(specularPath.string());
         std::cout << "Succeed to load specular map! " << std::endl;
     }
     else
     {
         std::cerr << "Failed to load specular map at " << specularPath.string() << std::endl;
     }
-
-    mpShader = std::make_shared<BlinPhongShader>();
 
     return true;
 }

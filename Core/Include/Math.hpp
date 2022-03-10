@@ -134,7 +134,7 @@ inline Vector<3, T>& Vector<3, T>::operator=(Vector<4, T> &&v) noexcept
 template<typename T> struct Vector<4, T> {
     union { 
         struct { T x, y, z, w; };
-        struct { T a, r, g, b; };
+        struct { T r, g, b, a; };
         T m[4];
     };
 

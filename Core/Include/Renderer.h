@@ -13,7 +13,7 @@
 namespace fs = std::filesystem;
 
 
-class RGBAColor;
+class ARGB;
 class Window;
 
 
@@ -56,9 +56,9 @@ void OnMouseMoveInput();
 
 void DrawModel(std::shared_ptr<Model> pModel);
 
-void DrawPixel(uint32_t x, uint32_t y, const RGBAColor &color);
+void DrawPixel(uint32_t x, uint32_t y, const ARGB &color);
 
-void DrawLine(Point2f point0, Point2f point1, const RGBAColor &color);
+void DrawLine(Point2f point0, Point2f point1, const ARGB &color);
 
 void DrawTriangle(
     std::shared_ptr<BlinPhongShader> pShader,
@@ -68,7 +68,7 @@ void DrawWireFrameTriangle(
     const Point3f& point0,
     const Point3f& point1,
     const Point3f& point2,
-    const RGBAColor& color);
+    const ARGB& color);
 
 Vec3f GetBarycentricCoord(
     const Point3f &A,

@@ -1,0 +1,33 @@
+{
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "C/C++: g++.exe build active file",
+            "command": "C:\\Program Files\\mingw64\\bin\\g++.exe",
+            "args": [
+                "-g",
+                "-std=c++11",
+                // "${file}",
+                "${fileDirname}\\temp.cpp",
+                "${fileDirname}\\window.cpp",
+                "${fileDirname}\\BMPImage.cpp",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe",
+                "-lgdi32",
+                // "-municode"
+            ],
+            "options": {
+                "cwd": "C:\\Program Files\\mingw64\\bin"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Generated task by Debugger"
+        }
+    ],
+    "version": "2.0.0"
+}

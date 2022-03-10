@@ -1,0 +1,3 @@
+D:/CodeDirectory/SoftwareRenderer/build/CMakeFiles/SoftwareRenderer.dir
+D:/CodeDirectory/SoftwareRenderer/build/CMakeFiles/edit_cache.dir
+D:/CodeDirectory/SoftwareRenderer/build/CMakeFiles/rebuild_cache.dir

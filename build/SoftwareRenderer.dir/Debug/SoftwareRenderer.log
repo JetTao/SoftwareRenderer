@@ -1,0 +1,49 @@
+﻿  Building Custom Rule D:/CodeDirectory/SoftwareRenderer/CMakeLists.txt
+  CMake is re-running because D:/CodeDirectory/SoftwareRenderer/build/CMakeFiles/generate.stamp dependency file is missing.
+  -- Configuring done
+  -- Generating done
+  -- Build files have been written to: D:/CodeDirectory/SoftwareRenderer/build
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(245,5): warning MSB8065: 项“D:\CodeDirectory\SoftwareRenderer\CMakeLists.txt”的自定义生成成功，但尚未创建指定的输出“d:\codedirectory\softwarerenderer\build\cmakefiles\generate.stamp”。这可能会导致增量生成无法正常工作。
+  Renderer.cpp
+D:\CodeDirectory\SoftwareRenderer\Core\Include\Math.hpp(18,31): warning C4305: “初始化”: 从“double”到“const float”截断
+D:\CodeDirectory\SoftwareRenderer\Core\Include\Mesh.h(52,1): warning C4267: “return”: 从“size_t”转换到“uint32_t”，可能丢失数据
+D:\CodeDirectory\SoftwareRenderer\Core\Source\../Include/RGBAColor.h(6,18): warning C4099: “RGBAColor”: 类型名称以前使用“class”现在使用的是“struct”
+D:\CodeDirectory\SoftwareRenderer\Core\Source\../Include/RGBAColor.h(6): message : 参见“RGBAColor”的声明
+D:\CodeDirectory\SoftwareRenderer\Parser\stb_image_write.h(776,13): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\CodeDirectory\SoftwareRenderer\Core\Source\Renderer.cpp(70,21): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+D:\CodeDirectory\SoftwareRenderer\Core\Source\Renderer.cpp(159,23): warning C4018: “<”: 有符号/无符号不匹配
+D:\CodeDirectory\SoftwareRenderer\Core\Source\Renderer.cpp(214,12): warning C4244: “初始化”: 从“T”转换到“int”，可能丢失数据
+          with
+          [
+              T=float
+          ]
+D:\CodeDirectory\SoftwareRenderer\Core\Source\Renderer.cpp(215,12): warning C4244: “初始化”: 从“T”转换到“int”，可能丢失数据
+          with
+          [
+              T=float
+          ]
+D:\CodeDirectory\SoftwareRenderer\Core\Source\Renderer.cpp(216,18): warning C4244: “初始化”: 从“int”转换到“float”，可能丢失数据
+D:\CodeDirectory\SoftwareRenderer\Core\Source\Renderer.cpp(218,11): warning C4244: “初始化”: 从“T”转换到“int”，可能丢失数据
+          with
+          [
+              T=float
+          ]
+D:\CodeDirectory\SoftwareRenderer\Core\Source\Renderer.cpp(274,5): warning C4018: “<”: 有符号/无符号不匹配
+D:\CodeDirectory\SoftwareRenderer\Core\Source\Renderer.cpp(275,5): warning C4018: “<”: 有符号/无符号不匹配
+D:\CodeDirectory\SoftwareRenderer\Core\Source\Renderer.cpp(276,5): warning C4018: “<”: 有符号/无符号不匹配
+D:\CodeDirectory\SoftwareRenderer\Core\Source\Renderer.cpp(277,5): warning C4018: “<”: 有符号/无符号不匹配
+D:\CodeDirectory\SoftwareRenderer\Core\Source\Renderer.cpp(284,30): warning C4244: “参数”: 从“int”转换到“T”，可能丢失数据
+          with
+          [
+              T=float
+          ]
+D:\CodeDirectory\SoftwareRenderer\Core\Source\Renderer.cpp(284,27): warning C4244: “参数”: 从“int”转换到“T”，可能丢失数据
+          with
+          [
+              T=float
+          ]
+D:\CodeDirectory\SoftwareRenderer\Core\Source\Renderer.cpp(384,63): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+D:\CodeDirectory\SoftwareRenderer\Core\Source\Renderer.cpp(384,63): warning C4267: “初始化”: 从“size_t”转换到“const int”，可能丢失数据
+D:\CodeDirectory\SoftwareRenderer\Core\Source\Renderer.cpp(486,50): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+D:\CodeDirectory\SoftwareRenderer\Core\Source\Renderer.cpp(486,50): warning C4267: “初始化”: 从“size_t”转换到“const int”，可能丢失数据
+  SoftwareRenderer.vcxproj -> D:\CodeDirectory\SoftwareRenderer\build\Debug\SoftwareRenderer.exe

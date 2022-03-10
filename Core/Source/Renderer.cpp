@@ -347,7 +347,7 @@ bool Renderer::CullBackface(
     const Point4f& point2)
 {
     Vec3f vector0{ point2 - point0 };
-    Vec3f vector1{ point1 - position0 };
+    Vec3f vector1{ point1 - point0 };
     Vec3f normalVector{ Normalize( Cross(vector0, vector1) ) };
 
     float degrees = Dot(normalVector, mCamera.Gaze);

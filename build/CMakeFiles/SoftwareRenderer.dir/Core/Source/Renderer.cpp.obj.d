@@ -314,6 +314,8 @@ CMakeFiles/SoftwareRenderer.dir/Core/Source/Renderer.cpp.obj: \
   C:\Program\ Files\llvm-mingw-20211002-msvcrt-x86_64\include\c++\v1\deque \
   D:\CodeDirectory\SoftwareRenderer\Core\Source\..\Include\Texture.h \
   D:\CodeDirectory\SoftwareRenderer\Core\Source\..\Include\..\..\Shaders\BlinPhongShader.h \
+  D:\CodeDirectory\SoftwareRenderer\Core\Source\..\Include\..\..\Shaders\BaseShader.h \
+  D:\CodeDirectory\SoftwareRenderer\Core\Source\..\Include\..\..\Shaders\..\Core\Include\Vertex.h \
   D:\CodeDirectory\SoftwareRenderer\Core\Source\..\Include\..\..\Shaders\..\Core\\Include\Vertex.h \
   D:\CodeDirectory\SoftwareRenderer\Core\Source\..\Include\..\..\Shaders\..\Core\Include\Math.hpp \
   D:\CodeDirectory\SoftwareRenderer\Core\Source\..\Include\..\..\Shaders\..\Core\Include\Texture.h \

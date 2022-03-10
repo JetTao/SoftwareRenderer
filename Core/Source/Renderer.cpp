@@ -154,6 +154,7 @@ void Renderer::DrawModel(std::shared_ptr<Model> pModel)
     pShader->SetDiffuseMap(pModel->GetDiffuse());
     pShader->SetNormalMap(pModel->GetNormal());
     pShader->SetSpecularMap(pModel->GetSpecular());
+    
     pModel->SetShader(pShader);
     auto pMesh = pModel->GetMesh();
     for (int i = 0; i < pMesh->GetNumIndices(); i += 3)
@@ -341,12 +342,12 @@ void Renderer::DrawWireFrameTriangle(
 }
 
 bool Renderer::CullBackface(
-    const Point4f& position0,
-    const Point4f& position1,
-    const Point4f& position2)
+    const Point4f& point0,
+    const Point4f& point1,
+    const Point4f& point2)
 {
-    Vec3f vector0{ position2 - position0 };
-    Vec3f vector1{ position1 - position0 };
+    Vec3f vector0{ point2 - point0 };
+    Vec3f vector1{ point1 - position0 };
     Vec3f normalVector{ Normalize( Cross(vector0, vector1) ) };
 
     float degrees = Dot(normalVector, mCamera.Gaze);

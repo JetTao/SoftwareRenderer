@@ -77,9 +77,9 @@ Vec3f GetBarycentricCoord(
     const Point2f &P);
 
 bool CullBackface(
-    const Point4f& position0,
-    const Point4f& position1,
-    const Point4f& position2);
+    const Point4f& point0,
+    const Point4f& point1,
+    const Point4f& point2);
 
 std::vector<std::array<Vertex, 3>> Clip(std::vector<Vertex>& vertices);
 

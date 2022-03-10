@@ -1,6 +1,6 @@
 #pragma once
 
-//#include "BaseShader.h"
+#include "BaseShader.h"
 
 #include "../Core//Include/Vertex.h"
 #include "../Core/Include/Math.hpp"
@@ -59,7 +59,7 @@ public:
 
         //return Color4f{ ambient + diffuse + specular, 1.0f };
 
-        ////return Color4f{ mpDiffuseMap->GetTexel(in.TexCoord), 0.0f};
+        return Color4f{ mpDiffuseMap->GetTexel(in.TexCoord), 0.0f};
 
         return Color4f{ 1.0f };
 

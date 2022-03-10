@@ -479,6 +479,8 @@ CMakeFiles/SoftwareRenderer.dir/main.cpp.obj: \
   D:\CodeDirectory\SoftwareRenderer\Core\Include\Mesh.h \
   D:\CodeDirectory\SoftwareRenderer\Core\Include\Texture.h \
   D:\CodeDirectory\SoftwareRenderer\Core\Include\..\..\Shaders\BlinPhongShader.h \
+  D:\CodeDirectory\SoftwareRenderer\Core\Include\..\..\Shaders\BaseShader.h \
+  D:\CodeDirectory\SoftwareRenderer\Core\Include\..\..\Shaders\..\Core\Include\Vertex.h \
   D:\CodeDirectory\SoftwareRenderer\Core\Include\..\..\Shaders\..\Core\\Include\Vertex.h \
   D:\CodeDirectory\SoftwareRenderer\Core\Include\..\..\Shaders\..\Core\Include\Math.hpp \
   D:\CodeDirectory\SoftwareRenderer\Core\Include\..\..\Shaders\..\Core\Include\Texture.h \

@@ -23,7 +23,6 @@ public:
         Point3f origin = Vec3f{ 0.0f, 0.0f, 10.0f },
         Vec3f   target = Vec3f{ 0.0f, 0.0f, 0.0f },
         Vec3f   up = Vec3f{ 0.0f, 1.0f, 0.0f },
-        float   aspectRatio = 1.0f,
         float   fov   = 45.0f,
         float   zNear = 0.01f,
         float   zFar  = 100.0f); 
@@ -48,7 +47,7 @@ public:
 
 public: 
 
-    Point3f Origin;
+    Point3f Position;
     Point3f Target;
     Vec3f   Gaze;
     Vec3f   Up;

@@ -6,8 +6,6 @@
 #include "Mesh.h"
 #include "Texture.h"
 
-#include "../../Shaders/BlinPhongShader.h"
-
 
 class Model {
 	
@@ -39,16 +37,6 @@ public:
 		return mpSpecularMap;
 	}
 
-	std::shared_ptr<BlinPhongShader> GetShader() const
-	{
-		return mpShader;
-	}
-
-	inline void SetShader(std::shared_ptr<BlinPhongShader> pShader)
-	{
-		mpShader = pShader;
-	}
-
 private:
 
 	std::shared_ptr<Mesh> mpMesh{ nullptr };
@@ -58,8 +46,6 @@ private:
 	std::shared_ptr<Texture> mpNormalMap{ nullptr };
 
 	std::shared_ptr<Texture> mpSpecularMap{ nullptr };
-
-	std::shared_ptr<BlinPhongShader> mpShader{ nullptr };
 
 public: 
 

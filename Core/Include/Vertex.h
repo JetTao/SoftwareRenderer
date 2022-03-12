@@ -6,15 +6,17 @@ struct Vertex
 {
     Point4f Position;
     Color4f Color;
-    Vec2f TexCoord;
+    Point2f TexCoord;
     Vec3f Normal;
     float RHW;
 };
 
-
 struct Fragment
 {
-    Point3f Position;
-    Vec2f TexCoord;
+    Point2i screenPosition;
+    Color4f Color;
+    Point2f TexCoord;
     Vec3f Normal;
+    float depth;
+
 };

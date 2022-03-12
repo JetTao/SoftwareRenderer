@@ -23,36 +23,33 @@ bool Model::LoadModelFromPath(const fs::path& path)
     if (fs::exists(diffusePath))
     {
         mpDiffuseMap = std::make_shared<Texture>(diffusePath.string());
-        // Diffuse.LoadTextureFromString(diffusePath.string());
         std::cout << "Succeed to load diffuse map! " << std::endl;
     }
     else 
     {
-        std::cerr << "Failed to load diffuse map at " << diffusePath.string() << std::endl;
+        std::cout << "Failed to load diffuse map at " << diffusePath.string() << std::endl;
     }
 
     fs::path normalPath = path.parent_path() / (path.stem().string().append("_normal.png"));
     if (fs::exists(normalPath))
     {
         mpNormalMap = std::make_shared<Texture>(normalPath.string());
-        // Normal.LoadTextureFromString(normalPath.string());
         std::cout << "Succeed to load normal map! " << std::endl;
     }
     else
     {
-        std::cerr << "Failed to load normal map at " << normalPath.string() << std::endl;
+        std::cout << "Failed to load normal map at " << normalPath.string() << std::endl;
     }
 
     fs::path specularPath = path.parent_path() / (path.stem().string().append("_specular.png"));
     if (fs::exists(specularPath))
     {
         mpSpecularMap = std::make_shared<Texture>(specularPath.string());
-        // Specular.LoadTextureFromString(specularPath.string());
         std::cout << "Succeed to load specular map! " << std::endl;
     }
     else
     {
-        std::cerr << "Failed to load specular map at " << specularPath.string() << std::endl;
+        std::cout << "Failed to load specular map at " << specularPath.string() << std::endl;
     }
 
     return true;

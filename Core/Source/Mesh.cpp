@@ -222,7 +222,7 @@ bool Mesh::LoadMeshFromPath(const fs::path& path)
 
     for (auto i = 0; i < attrib.vertices.size() / 3; i++)
     {
-        mVertices.emplace_back(
+        mPositions.emplace_back(
             attrib.vertices[3 * i + 0],
             attrib.vertices[3 * i + 1],
             attrib.vertices[3 * i + 2]
@@ -252,7 +252,7 @@ bool Mesh::LoadMeshFromPath(const fs::path& path)
     }
 
     std::cout << "model_name: " + path.stem().string() << "\nvertex_size: " 
-        << mVertices.size() << "\nface_size: " << mIndices.size() / 3 << std::endl;;
+        << mPositions.size() << "\nface_size: " << mIndices.size() / 3 << std::endl;;
 
     return true;
 }

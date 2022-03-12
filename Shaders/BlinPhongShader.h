@@ -6,23 +6,13 @@
 #include "../Core/Include/Math.hpp"
 #include "../Core/Include/Texture.h"
 
-#include <functional>
-#include <cmath>
-
-
-struct BlinPhongShader
+struct BlinPhongShader : BaseShader
 {
 
 public:
 
-    struct TransformMatrix
-    {
-        Mat4f Model;
-        Mat4f View;
-        Mat4f Projection;
-    };
 
-    struct Light
+    struct DirectionLight
     {
         Point3f Position;
         Vec3f   Ambient;
@@ -30,96 +20,63 @@ public:
         Vec3f   Specular;
     };
 
-    Vertex& VertexShader(Vertex& in)
+    bool VertexShader(Vertex& vertex) override
     {
-        in.Position = mMatrices.Projection * mMatrices.View * mMatrices.Model * in.Position;
-        in.RHW = 1.0f / in.Position.w;
-        return in;
+        vertex.Position = Projection * View * Model * vertex.Position;
+        vertex.Normal =  MatrixInvert(Model).GetTranspose() * Vec4f{ vertex.Normal, 0.0f };
+        FragPosition =  Model * vertex.Position;
+        return true;
     }
     
-    Color4f FragmentShader(Fragment& in)
+    bool FragmentShader(Fragment& fragment) override
     {
-        Color3f ambient{ 0.8f, 0.3f, 0.3f };
+        Color3f ambient = Light.Ambient * Color3f{ 0.1f, 0.1f, 0.1f };
 
-        /*Vec3f normal = Normalize(mpNormalMap->GetTexel(in.TexCoord));
-        Vec3f lightDirection = Normalize(mLight.Position - in.Position);
+        // Vec3f normal = Normalize(pNormalMap->GetTexel(fragment.TexCoord));
+        Vec3f normal = Normalize((fragment.Normal));
+        Vec3f lightDirection = Normalize(Light.Position - FragPosition);
         float lightStrength = Max( Dot(normal, lightDirection), 0.0f );
 
-        Color3f diffuse = mLight.Diffuse;
-            diffuse = diffuse * mpDiffuseMap->GetTexel(in.TexCoord);
-        diffuse = diffuse * lightStrength;
+        Color3f diffuse = Light.Diffuse * pDiffuseMap->GetTexel(fragment.TexCoord)
+            * lightStrength;
 
-        auto halfDirection = Normalize(lightDirection + mViewDirection);
-        float exp = std::pow( Max( Dot(normal, halfDirection ), 0.0f ), 32.0f );
+        Vec3f viewDirection = Normalize(ViewPosition - FragPosition);
+        auto halfDirection = Normalize(lightDirection + viewDirection);
+        float exp = std::pow( Max( Dot(normal, halfDirection ), 0.0f ), 64.0f );
 
-        Vec3f specular = Vec3f{ 0.3f, 0.3f, 0.3f } * exp * 
-            mpSpecularMap->GetTexel(in.TexCoord);*/
+        Vec3f specular = Light.Specular * exp * 
+            pSpecularMap->GetTexel(fragment.TexCoord);
         
-        
+        fragment.Color = Color4f{ ambient + diffuse + specular, 1.0f };
 
-        return Color4f{ mpDiffuseMap->GetTexel(in.TexCoord), 1.0f };
+        return true;        
 
-        //return Color4f{ ambient + diffuse , 1.0f };
+    };
 
-        //return Color4f{ ambient + diffuse + specular, 1.0f };
-
-        // return Color4f{ 1.0f };
-
-
-
-    }
-
-    inline void SetLight(const Light& light)
-    {
-        mLight = light;
-    }
-
-    inline void SetTransformMatrix(const TransformMatrix& matrices)
-    {
-        mMatrices = matrices;
-    }
-
-    inline void SetViewDirection(const Vec3f& direction)
-    {
-        mViewDirection = direction;
-    }
-
-    inline void SetDiffuseMap(std::shared_ptr<Texture> pTexture)
-    {
-        mpDiffuseMap = pTexture;
-    }
-
-    inline void SetNormalMap(std::shared_ptr<Texture> pTexture)
-    {
-        mpNormalMap = pTexture;
-    }
-
-    inline void SetSpecularMap(std::shared_ptr<Texture> pTexture)
-    {
-        mpSpecularMap = pTexture;
-    }
-
-    virtual ~BlinPhongShader() = default;
+    ~BlinPhongShader() = default;
     
-private:
+public:
 
-    Light mLight;
+    DirectionLight Light;
 
-    TransformMatrix mMatrices;
+    Mat4f Model;
 
-    Vec3f mViewDirection;
+    Mat4f View;
+    
+    Mat4f Projection;
 
-    std::shared_ptr<Texture> mpDiffuseMap;
+    Point3f FragPosition;
 
-    std::shared_ptr<Texture> mpNormalMap;
+    Point3f ObjectPosition;
 
-    std::shared_ptr<Texture> mpSpecularMap;
+    Point3f ViewPosition;
 
-// public: 
+    std::shared_ptr<Texture> pDiffuseMap;
 
-//     Texture Diffuse;
-//     Texture Normal;
-//     Texture Specular;
+    std::shared_ptr<Texture> pNormalMap;
+
+    std::shared_ptr<Texture> pSpecularMap;
+
 };
 
 

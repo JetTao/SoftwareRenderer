@@ -14,12 +14,12 @@ public:
 	struct Index
 	{
 		Index() = default;
-		Index(uint32_t vertexIndex, uint32_t texCoordIndex, uint32_t normalIndex)
-			: VertexIndex(vertexIndex)
+		Index(uint32_t positionIndex, uint32_t texCoordIndex, uint32_t normalIndex)
+			: PositionIndex(positionIndex)
 			, TexCoordIndex(texCoordIndex)
 			, NormalIndex(normalIndex) {}
 
-		uint32_t VertexIndex;
+		uint32_t PositionIndex;
 		uint32_t TexCoordIndex;
 		uint32_t NormalIndex;
 	};
@@ -37,19 +37,25 @@ public:
 
 	bool LoadMeshFromPath(const fs::path& path);
 
-	// inline std::vector<Vec3f>& GetVertices() const
-	// {
-	// 	return mVertices;
-	// }
 
-	// inline std::vector<Index>& GetIndices() const
-	// {
-	// 	return mIndices;
-	// }
+	inline uint32_t NumPositions() const
+	{
+		return mPositions.size();
+	}
 
-	inline uint32_t GetNumIndices() const
+	inline uint32_t NumIndices() const
 	{
 		return mIndices.size();
+	}
+
+	inline uint32_t NumTexCoords() const
+	{
+		return mTexCoords.size();
+	}
+
+	inline uint32_t NumNormals() const
+	{
+		return mNormals.size();
 	}
 
 	inline Index GetIndex(uint32_t index) const
@@ -59,7 +65,7 @@ public:
 
 	inline Point3f GetPosition(uint32_t index) const
 	{
-		return mVertices[index];
+		return mPositions[index];
 	}
 
 	inline Point2f GetTexCoord(uint32_t index) const
@@ -77,7 +83,7 @@ public:
 
 private:
 
-	std::vector<Point3f> mVertices{};
+	std::vector<Point3f> mPositions{};
 
 	std::vector<Point2f> mTexCoords{};
 

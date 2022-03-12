@@ -313,13 +313,9 @@ CMakeFiles/SoftwareRenderer.dir/Core/Source/Renderer.cpp.obj: \
   C:\Program\ Files\llvm-mingw-20211002-msvcrt-x86_64\include\c++\v1\stack \
   C:\Program\ Files\llvm-mingw-20211002-msvcrt-x86_64\include\c++\v1\deque \
   D:\CodeDirectory\SoftwareRenderer\Core\Source\..\Include\Texture.h \
-  D:\CodeDirectory\SoftwareRenderer\Core\Source\..\Include\..\..\Shaders\BlinPhongShader.h \
+  D:\CodeDirectory\SoftwareRenderer\Core\Source\..\Include\Vertex.h \
   D:\CodeDirectory\SoftwareRenderer\Core\Source\..\Include\..\..\Shaders\BaseShader.h \
   D:\CodeDirectory\SoftwareRenderer\Core\Source\..\Include\..\..\Shaders\..\Core\Include\Vertex.h \
-  D:\CodeDirectory\SoftwareRenderer\Core\Source\..\Include\..\..\Shaders\..\Core\\Include\Vertex.h \
-  D:\CodeDirectory\SoftwareRenderer\Core\Source\..\Include\..\..\Shaders\..\Core\Include\Math.hpp \
-  D:\CodeDirectory\SoftwareRenderer\Core\Source\..\Include\..\..\Shaders\..\Core\Include\Texture.h \
-  D:\CodeDirectory\SoftwareRenderer\Core\Source\..\Include\Vertex.h \
   C:\Program\ Files\llvm-mingw-20211002-msvcrt-x86_64\include\c++\v1\unordered_map \
   C:\Program\ Files\llvm-mingw-20211002-msvcrt-x86_64\include\c++\v1\__functional\is_transparent.h \
   C:\Program\ Files\llvm-mingw-20211002-msvcrt-x86_64\include\c++\v1\__hash_table \
@@ -491,5 +487,8 @@ CMakeFiles/SoftwareRenderer.dir/Core/Source/Renderer.cpp.obj: \
   C:\Program\ Files\llvm-mingw-20211002-msvcrt-x86_64\include\mcx.h \
   C:\Program\ Files\llvm-mingw-20211002-msvcrt-x86_64\include\imm.h \
   C:\Program\ Files\llvm-mingw-20211002-msvcrt-x86_64\include\Windowsx.h \
-  C:\Program\ Files\llvm-mingw-20211002-msvcrt-x86_64\include\c++\v1\array \
-  D:\CodeDirectory\SoftwareRenderer\Parser\stb_image_write.h
+  D:\CodeDirectory\SoftwareRenderer\Core\Source\..\..\Shaders\BlinPhongShader.h \
+  D:\CodeDirectory\SoftwareRenderer\Core\Source\..\Include\..\..\Shaders\..\Core\\Include\Vertex.h \
+  D:\CodeDirectory\SoftwareRenderer\Core\Source\..\Include\..\..\Shaders\..\Core\Include\Math.hpp \
+  D:\CodeDirectory\SoftwareRenderer\Core\Source\..\Include\..\..\Shaders\..\Core\Include\Texture.h \
+  C:\Program\ Files\llvm-mingw-20211002-msvcrt-x86_64\include\c++\v1\array

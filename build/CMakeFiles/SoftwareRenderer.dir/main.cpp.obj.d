@@ -478,16 +478,15 @@ CMakeFiles/SoftwareRenderer.dir/main.cpp.obj: \
   D:\CodeDirectory\SoftwareRenderer\Core\Include\Model.h \
   D:\CodeDirectory\SoftwareRenderer\Core\Include\Mesh.h \
   D:\CodeDirectory\SoftwareRenderer\Core\Include\Texture.h \
-  D:\CodeDirectory\SoftwareRenderer\Core\Include\..\..\Shaders\BlinPhongShader.h \
+  D:\CodeDirectory\SoftwareRenderer\Core\Include\Vertex.h \
   D:\CodeDirectory\SoftwareRenderer\Core\Include\..\..\Shaders\BaseShader.h \
   D:\CodeDirectory\SoftwareRenderer\Core\Include\..\..\Shaders\..\Core\Include\Vertex.h \
-  D:\CodeDirectory\SoftwareRenderer\Core\Include\..\..\Shaders\..\Core\\Include\Vertex.h \
-  D:\CodeDirectory\SoftwareRenderer\Core\Include\..\..\Shaders\..\Core\Include\Math.hpp \
-  D:\CodeDirectory\SoftwareRenderer\Core\Include\..\..\Shaders\..\Core\Include\Texture.h \
-  D:\CodeDirectory\SoftwareRenderer\Core\Include\Vertex.h \
   C:\Program\ Files\llvm-mingw-20211002-msvcrt-x86_64\include\c++\v1\unordered_map \
   C:\Program\ Files\llvm-mingw-20211002-msvcrt-x86_64\include\c++\v1\__functional\is_transparent.h \
   C:\Program\ Files\llvm-mingw-20211002-msvcrt-x86_64\include\c++\v1\__hash_table \
   C:\Program\ Files\llvm-mingw-20211002-msvcrt-x86_64\include\c++\v1\__node_handle \
   C:\Program\ Files\llvm-mingw-20211002-msvcrt-x86_64\include\c++\v1\optional \
-  D:\CodeDirectory\SoftwareRenderer\Parser\..\Shaders\BlinPhongShader.h
+  D:\CodeDirectory\SoftwareRenderer\Parser\..\Shaders\BlinPhongShader.h \
+  D:\CodeDirectory\SoftwareRenderer\Core\Include\..\..\Shaders\..\Core\\Include\Vertex.h \
+  D:\CodeDirectory\SoftwareRenderer\Core\Include\..\..\Shaders\..\Core\Include\Math.hpp \
+  D:\CodeDirectory\SoftwareRenderer\Core\Include\..\..\Shaders\..\Core\Include\Texture.h

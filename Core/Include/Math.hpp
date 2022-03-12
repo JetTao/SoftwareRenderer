@@ -868,10 +868,6 @@ inline Mat4f LookAt(const Vec3f &eye, const Vec3f &gaze, const Vec3f &up)
 
     Mat4f rhs = Mat4f::GetIdentity();
     rhs = Translate(rhs, -eye.x, -eye.y, -eye.z);
-    // std::cout << "lhs: \n" << lhs << std::endl;
-    // std::cout << "eye: \n" << eye << std::endl;
-    // std::cout << "rhs: \n" << rhs << std::endl;
-    // std::cout << "ret: \n" << ret << std::endl;
 
     return lhs * rhs;
 }
@@ -886,9 +882,6 @@ inline Mat4f Perspective(const float fov, const float aspect, const float n, con
     const float r = t * aspect;
     const float l = -r;
 
-    // std::cout << "fov: " << fov << "tan(fov / 2)" << tan(fov * 0.5f) << std::endl;
-    //std::cout << "t: " << t << " b: " << b << " r: " << r << " l" << l << " n: " << zNear << " f: " << zFar << std::endl; 
-
     Mat4f mat = Mat4f::GetZero();
 
     mat[0][0] = (2.0f * zNear) / (r - l);
@@ -898,9 +891,7 @@ inline Mat4f Perspective(const float fov, const float aspect, const float n, con
     mat[2][2] = (zNear + zFar) / (zNear - zFar);
     mat[2][3] = (2.0f * zFar * zNear) / (zNear - zFar);
     mat[3][2] = -1.0f;
-
-    // std::cout << mat << std::endl;
-
+    
     return mat;
 }
 

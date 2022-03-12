@@ -2,11 +2,10 @@
 #include "../Include/ARGB.h"
 #include "../Include/Window.h"
 
+#include "../../Shaders/BlinPhongShader.h"
+
 #include <memory>
 #include <array>
-#define STB_IMAGE_WRITE_IMPLEMENTATION
-#include "stb_image_write.h"
-
 
 
 void Renderer::LoadScene(void)
@@ -15,7 +14,7 @@ void Renderer::LoadScene(void)
     fs::path crabPath = mProjectPath / "Scenes/back_pack/back_pack.obj";
     auto pCrabModel = std::make_shared<Model>(crabPath);
 
-    mModels["crab"] = pCrabModel;
+    mModels["back_pack"] = pCrabModel;
 }
 
 
@@ -54,160 +53,105 @@ void Renderer::OnUpdate()
 
     OnKeyboardInput();
     OnMouseMoveInput();
+    mpWindow->UpdateWindowColor();
+
 }
 
 void Renderer::OnRender()
 {
-    DrawModel(mModels["crab"]);
-
-    
-    mpWindow->SwapColorBuffer(mFramebuffer.GetColorBuffer());
-    mpWindow->UpdateWindowColor();
-    mFramebuffer.Reset();
-}
-
-void Renderer::OnKeyboardInput()
-{
-    float deltaTime = mTimer.GetDeltaMilliseconds();
-
-    if (mpWindow->GetKeyState('R'))
-    {
-        mCamera.Reset();
-        return;
-    }
-    if (mpWindow->GetKeyState('W'))
-    {
-        mCamera.Dolly(deltaTime / 100.0f);
-    }
-    if (mpWindow->GetKeyState('S'))
-    {
-        mCamera.Dolly(-deltaTime / 100.0f);
-    }
-    if (mpWindow->GetKeyState('A'))
-    {
-        mCamera.Pan(-deltaTime, 0.0f);
-    }
-    if (mpWindow->GetKeyState('D'))
-    {
-        mCamera.Pan(deltaTime, 0.0f);
-    }
-    if (mpWindow->GetKeyState(VK_UP))
-    {
-        mCamera.Orbit(0.0f, -deltaTime / 8.0f);
-    }
-    if (mpWindow->GetKeyState(VK_DOWN))
-    {
-        mCamera.Orbit(0.0f, deltaTime / 8.0f);
-    }
-    if (mpWindow->GetKeyState(VK_LEFT))
-    {
-        mCamera.Orbit(-deltaTime / 8.0f, 0.0f);
-    }
-    if (mpWindow->GetKeyState(VK_RIGHT))
-    {
-        mCamera.Orbit(deltaTime / 8.0f, 0.0f);
-    }
-}
-
-void Renderer::OnMouseMoveInput()
-{
-    static float lastX;
-    static float lastY;
-    float xOffset = (mpWindow->GetMousePosX() - lastX);
-    float yOffset = (mpWindow->GetMousePosY() - lastY);
-    if (mpWindow->GetButtonState(VK_LBUTTON)) {
-        mCamera.Orbit(xOffset, yOffset);
-    }
-    if (mpWindow->GetButtonState(VK_RBUTTON)) {
-        mCamera.Pan(xOffset, yOffset);
-    }
-    mCamera.Dolly(mpWindow->GetDeltaZ());
-    mpWindow->SetDeltaZ(0);
-    lastX = mpWindow->GetMousePosX();
-    lastY = mpWindow->GetMousePosY();
-}
-
-void Renderer::DrawModel(std::shared_ptr<Model> pModel)
-{
-    //auto data = pModel->GetDiffuse()->GetData();
-    //for (auto i = 0; i < 800; i++)
-    //{
-    //    for (auto j = 0; j < 800; j++)
-    //    {
-    //        auto index = j * 800 + i;
-
-    //        Color4f color3;
-
-    //        color3.r = data[3 * index + 0];
-    //        color3.g = data[3 * index + 1];
-    //        color3.b = data[3 * index + 2];
-    //        color3.a = 1.0f;
-
-    //        auto argbColor = Color4fToARGB(color3);
-    //        argbColor.a = 255;
-
-    //        DrawPixel(i, j, argbColor);
-    //    }
-    //}
-
     Mat4f model     { Mat4f::GetIdentity() };        
     Mat4f projection{ mCamera.GetPerspectiveMatrix() };
     Mat4f view      { mCamera.GetViewMatrix() }; 
-    Mat4f viewport  { Viewport(mWidth - 1, mHeight - 1) };
-    BlinPhongShader::Light light{
-        Point3f{ 1.2f, 1.0f, 2.0f },
+
+    static float theta = 0;
+    
+    Point3f lightPosition{ 0, 0.0f, 100.0f };
+
+    BlinPhongShader::DirectionLight light{
+        Point3f{ lightPosition },
         Color3f{ 0.2f, 0.2f, 0.2f },
         Color3f{ 0.5f, 0.5f, 0.5f },
         Color3f{ 1.0f, 1.0f, 1.0f }
     };
-    BlinPhongShader::TransformMatrix matrices{
-        model,
-        view,
-        projection
-    };
 
-    auto pShader = std::make_shared<BlinPhongShader>();
+    auto pBackPackModel = mModels["back_pack"];
 
-    pShader->SetTransformMatrix(matrices);
-    pShader->SetLight(light);
-    pShader->SetViewDirection(mCamera.Gaze);
+    auto pBackPackShader = std::make_shared<BlinPhongShader>();
 
-    pShader->SetDiffuseMap(pModel->GetDiffuse());
-    pShader->SetNormalMap(pModel->GetNormal());
-    pShader->SetSpecularMap(pModel->GetSpecular());
+    pBackPackShader->Model = model;
+    pBackPackShader->View = view;
+    pBackPackShader->Projection = projection;
+    pBackPackShader->Light = light;
+    pBackPackShader->ViewPosition = mCamera.Position;
 
-    /*pShader->Diffuse = pModel->Diffuse;
-    pShader->Normal = pModel->Normal;
-    pShader->Specular = pModel->Specular;*/
-    
+    pBackPackShader->pDiffuseMap = pBackPackModel->GetDiffuse();
+    pBackPackShader->pNormalMap = pBackPackModel->GetNormal();
+    pBackPackShader->pSpecularMap = pBackPackModel->GetSpecular();
+
+    DrawModel(pBackPackModel, pBackPackShader);
+ 
+    mpWindow->SwapColorBuffer(mFramebuffer.GetColorBuffer());
+    mFramebuffer.Reset();
+
+    // exit(0);
+}
+
+
+
+void Renderer::DrawModel(
+    std::shared_ptr<Model> pModel,
+    std::shared_ptr<BaseShader> pShader)
+{
+
     auto pMesh = pModel->GetMesh();
-    for (int i = 0; i < pMesh->GetNumIndices(); i += 3)
+
+    for (int i = 0; i < pMesh->NumIndices(); i += 3)
     {
-        std::vector<Vertex> vertices(3);
+        std::array<Vertex, 3> triangle{};
         for (int j = 0; j < 3; j++)
         {
-            vertices[j].Position = pMesh->GetPosition(pMesh->GetIndex(i + j).VertexIndex);
-            vertices[j].TexCoord = pMesh->GetTexCoord(pMesh->GetIndex(i + j).TexCoordIndex);
-            vertices[j].Normal   = pMesh->GetNormal(pMesh->GetIndex(i + j).NormalIndex);
+            auto positionIndex = pMesh->GetIndex(i + j).PositionIndex;
+            auto texCoordIndex = pMesh->GetIndex(i + j).TexCoordIndex;
+            auto normalIndex = pMesh->GetIndex(i + j).NormalIndex;
+
+            if (positionIndex < pMesh->NumPositions())
+            {
+                triangle[j].Position = pMesh->GetPosition(positionIndex);
+            }
+            if (texCoordIndex < pMesh->NumTexCoords())
+            {
+                triangle[j].TexCoord = pMesh->GetTexCoord(texCoordIndex);
+            }
+            if (normalIndex < pMesh->NumNormals())
+            {
+                triangle[j].Normal   = pMesh->GetNormal(normalIndex);
+            }
+        }
+
+
+        for (auto &&vertex : triangle) 
+        {
+            pShader->VertexShader(vertex);
+            vertex.RHW = 1.0f / vertex.Position.w;
         }
 
         if (CullBackface(
-            vertices[0].Position,
-            vertices[1].Position,
-            vertices[2].Position))
+            triangle[0].Position,
+            triangle[1].Position,
+            triangle[2].Position))
         {
             continue;
         }
-        for (auto &&vertex : vertices) 
+        auto triangles = Clip(triangle);
+
+        for (auto &&triangle : triangles) 
         {
-            vertex = pShader->VertexShader(vertex);
-        }
-        auto triangles = Clip(vertices);
-        for (auto &&triangle : triangles) {
             for (auto&& vertex : triangle)
             {
-                vertex.Position = viewport * vertex.Position.Homogenize();
+                vertex.Position = Viewport(mWidth - 1, mHeight - 1)
+                    * vertex.Position.Homogenize();
             }
+            
             DrawTriangle(pShader, triangle);
         }
 
@@ -272,7 +216,7 @@ Point3f Renderer::GetBarycentricCoord(
 }
 
 void Renderer::DrawTriangle(
-    std::shared_ptr<BlinPhongShader> pShader,
+    std::shared_ptr<BaseShader> pShader,
     std::array<Vertex, 3>& triangle)
 {
     float maxX, maxY;
@@ -302,7 +246,7 @@ void Renderer::DrawTriangle(
         for (int y = bottomY; y <= topY; y++) 
         {
 
-            Point2f point(x, y);
+            Point2f point{ static_cast<float>(x), static_cast<float>(y) };
             auto barycentricCoord = GetBarycentricCoord(
                 Point3f{ triangle[0].Position },
                 Point3f{ triangle[1].Position },
@@ -311,18 +255,22 @@ void Renderer::DrawTriangle(
 
             if (barycentricCoord.x > 0 && barycentricCoord.y > 0 && barycentricCoord.z > 0) 
             {
-                
+                Color4f color{ 0.0f, 0.0f, 0.0f, 0.0f };
                 Point2f texCoord{ 0.0f, 0.0f };
                 Vec3f normal{ 0.0f, 0.0f, 0.0f };
                 float reciprocalDepth = 0.0f;
                 for (int i = 0; i < 3; i++)
                 {
                     reciprocalDepth += barycentricCoord[i] * triangle[i].RHW;    // 1/z = 1/z1*s + 1/z2*(1-s)
+                    color += barycentricCoord[i] * triangle[i].Color * triangle[i].RHW;
                     texCoord += barycentricCoord[i] * triangle[i].TexCoord * triangle[i].RHW;
                     normal += barycentricCoord[i] * triangle[i].Normal * triangle[i].RHW;
+
                 }
 
+                color /= reciprocalDepth;
                 texCoord /= reciprocalDepth;
+                normal /= reciprocalDepth;
 
                 float depth =  1.0f / reciprocalDepth;
 
@@ -331,21 +279,22 @@ void Renderer::DrawTriangle(
 
                     mFramebuffer.SetDepth(x, y, depth);
 
-                    Fragment fragment;
-                    fragment.Position = Point3f{
-                        static_cast<float>(x), 
-                        static_cast<float>(y), 
-                        depth };
-                    fragment.TexCoord = texCoord;
+                    Fragment fragment{
+                        Point2i{ x, y },
+                        color,
+                        texCoord,
+                        normal,
+                        depth
+                    };
 
-                    auto pixelColor = pShader->FragmentShader(fragment);
-                    ARGB color = Color4fToARGB(pixelColor);
-
-                    DrawPixel(x, y, color);
+                    pShader->FragmentShader(fragment);
+                    ARGB argbColor = Color4fToARGB(fragment.Color);
+                    DrawPixel(x, y, argbColor);
                 }
             }
         }
     }
+
 }
 
 void Renderer::DrawWireFrameTriangle(
@@ -364,32 +313,37 @@ bool Renderer::CullBackface(
     const Point4f& point1,
     const Point4f& point2)
 {
-    Vec3f vector0{ point2 - point0 };
-    Vec3f vector1{ point1 - point0 };
+    Vec3f vector0{ point1 - point0 };
+    Vec3f vector1{ point2 - point1 };
     Vec3f normalVector{ Normalize( Cross(vector0, vector1) ) };
 
-    float degrees = Dot(normalVector, mCamera.Gaze);
+    float degrees = Dot(normalVector, -mCamera.Gaze);
 
     return degrees < 0;
 }
 
 
 std::vector<std::array<Vertex, 3>> 
-Renderer::Clip(std::vector<Vertex>& vertices)
+Renderer::Clip(const std::array<Vertex, 3>& triangle)
 {
 
+    std::vector<Vertex> clippingVertices{
+        triangle[0],
+        triangle[1],
+        triangle[2]
+    };
     std::vector<Vertex> clippedVertices;
 
-    if (ClipSpaceCull(vertices[0].Position,
-                      vertices[1].Position, 
-                      vertices[2].Position))
+    if (ClipSpaceCull(clippingVertices[0].Position,
+                      clippingVertices[1].Position, 
+                      clippingVertices[2].Position))
     {
         
         for (uint32_t CLIP_PLANE = EPSILON_PLANE; CLIP_PLANE <= FAR_PLANE; CLIP_PLANE++) 
         {
-            ClipPolygonAgainstPlane(vertices, clippedVertices, CLIP_PLANE);
+            ClipPolygonAgainstPlane(clippingVertices, clippedVertices, CLIP_PLANE);
 
-            std::swap(vertices, clippedVertices);
+            std::swap(clippingVertices, clippedVertices);
 
             if (CLIP_PLANE != FAR_PLANE) 
             {
@@ -401,7 +355,8 @@ Renderer::Clip(std::vector<Vertex>& vertices)
     std::vector<std::array<Vertex, 3>> triangles;
 
     const int numClippedTriangles = clippedVertices.size() - 2;
-    for (auto i = 0; i < numClippedTriangles; i++) {
+    for (auto i = 0; i < numClippedTriangles; i++) 
+    {
         
         std::array<Vertex, 3> triangle = {
              clippedVertices[0],
@@ -416,9 +371,9 @@ Renderer::Clip(std::vector<Vertex>& vertices)
 }
 
 bool Renderer::ClipSpaceCull(
-    const Vec4f &point1,
-    const Vec4f &point2,
-    const Vec4f &point3)
+    const Point4f &point1,
+    const Point4f &point2,
+    const Point4f &point3)
 {
     if (point1.w < EPSILON && point2.w < EPSILON && point3.w < EPSILON) 
         return false;
@@ -432,23 +387,23 @@ bool Renderer::ClipSpaceCull(
     return true;
 }
 
-bool Renderer::IsInsidePlane(Vec4f &clipCoord, uint32_t PLANE)
+bool Renderer::IsInsidePlane(Point4f &clipPoint, uint32_t PLANE)
 {
     switch (PLANE) {
         case EPSILON_PLANE: 
-            return EPSILON < clipCoord.w;
+            return EPSILON < clipPoint.w;
         case TOP_PLANE:
-            return clipCoord.y  < clipCoord.w;
+            return clipPoint.y  < clipPoint.w;
         case LEFT_PLANE:
-            return -clipCoord.x < clipCoord.w;
+            return -clipPoint.x < clipPoint.w;
         case BOTTOM_PLANE:
-            return -clipCoord.y < clipCoord.w;
+            return -clipPoint.y < clipPoint.w;
         case RIGHT_PLANE:
-            return clipCoord.x  < clipCoord.w;
+            return clipPoint.x  < clipPoint.w;
         case NEAR_PLANE:
-            return -clipCoord.z < clipCoord.w;
+            return -clipPoint.z < clipPoint.w;
         case FAR_PLANE:
-            return clipCoord.z  < clipCoord.w;
+            return clipPoint.z  < clipPoint.w;
         default:
             return false;
         break;
@@ -456,31 +411,32 @@ bool Renderer::IsInsidePlane(Vec4f &clipCoord, uint32_t PLANE)
 }
 
 float Renderer::GetIntersectionFactor(
-    Vec4f &previousVertex,
-    Vec4f &currentVertex,
+    Point4f &previousPoint,
+    Point4f &currentPoint,
     uint32_t PLANE)
 {
-    switch (PLANE) {
+    switch (PLANE) 
+    {
         case EPSILON_PLANE:
-            return (EPSILON - previousVertex.w) / (currentVertex.w - previousVertex.w);
+            return (EPSILON - previousPoint.w) / (currentPoint.w - previousPoint.w);
         case TOP_PLANE:
-            return (previousVertex.y - previousVertex.w) / 
-                   ((previousVertex.y - previousVertex.w) - (currentVertex.y - currentVertex.w));
+            return (previousPoint.y - previousPoint.w) / 
+                   ((previousPoint.y - previousPoint.w) - (currentPoint.y - currentPoint.w));
         case LEFT_PLANE: 
-            return (previousVertex.x + previousVertex.w) / 
-                   ((previousVertex.x + previousVertex.w) - (currentVertex.x + currentVertex.w));
+            return (previousPoint.x + previousPoint.w) / 
+                   ((previousPoint.x + previousPoint.w) - (currentPoint.x + currentPoint.w));
         case BOTTOM_PLANE:
-            return (previousVertex.y + previousVertex.w) /
-                   ((previousVertex.y + previousVertex.w) - (currentVertex.y + currentVertex.w));
+            return (previousPoint.y + previousPoint.w) /
+                   ((previousPoint.y + previousPoint.w) - (currentPoint.y + currentPoint.w));
         case RIGHT_PLANE:
-            return (previousVertex.x - previousVertex.w) /
-                   ((previousVertex.x - previousVertex.w) - (currentVertex.x - currentVertex.w));
+            return (previousPoint.x - previousPoint.w) /
+                   ((previousPoint.x - previousPoint.w) - (currentPoint.x - currentPoint.w));
         case NEAR_PLANE:
-            return (previousVertex.z + previousVertex.w) /
-                   ((previousVertex.z + previousVertex.w) - (currentVertex.z + currentVertex.w));
+            return (previousPoint.z + previousPoint.w) /
+                   ((previousPoint.z + previousPoint.w) - (currentPoint.z + currentPoint.w));
         case FAR_PLANE:
-            return (previousVertex.z - previousVertex.w) /
-                   ((previousVertex.z - previousVertex.w) - (currentVertex.z - currentVertex.w));
+            return (previousPoint.z - previousPoint.w) /
+                   ((previousPoint.z - previousPoint.w) - (currentPoint.z - currentPoint.w));
         default:
 
             return 0.0f;
@@ -504,14 +460,16 @@ void Renderer::ClipPolygonAgainstPlane(
     
     const int NUM_VERTICES = inputVertices.size();
 
-    for (size_t i = 0; i < NUM_VERTICES; i++) {
+    for (size_t i = 0; i < NUM_VERTICES; i++) 
+    {
         previousVertex = inputVertices[i];
         currentVertex  = inputVertices[(i + 1) % NUM_VERTICES];
 
         previousDot = IsInsidePlane(previousVertex.Position, PLANE);
         currentDot = IsInsidePlane(currentVertex.Position, PLANE);
 
-        if (previousDot != currentDot) {
+        if (previousDot != currentDot) 
+        {
             intersectionFactor = GetIntersectionFactor(previousVertex.Position,
                                                        currentVertex.Position, 
                                                        PLANE);
@@ -527,12 +485,73 @@ void Renderer::ClipPolygonAgainstPlane(
                                           
             intersectionPoint.RHW = 1.0f / intersectionPoint.Position.w; 
 
-            outputVertices.emplace_back(intersectionPoint);
+            outputVertices.push_back(intersectionPoint);
         }
-        if (currentDot) {
-            outputVertices.emplace_back(currentVertex);  
+        if (currentDot) 
+        {
+            outputVertices.push_back(currentVertex);  
         }
     }
 }
 
 
+void Renderer::OnKeyboardInput()
+{
+    float deltaTime = mTimer.GetDeltaMilliseconds();
+
+    if (mpWindow->GetKeyState('R'))
+    {
+        mCamera.Reset();
+        return;
+    }
+    if (mpWindow->GetKeyState('W'))
+    {
+        mCamera.Dolly(deltaTime / 100.0f);
+    }
+    if (mpWindow->GetKeyState('S'))
+    {
+        mCamera.Dolly(-deltaTime / 100.0f);
+    }
+    if (mpWindow->GetKeyState('A'))
+    {
+        mCamera.Pan(-deltaTime, 0.0f);
+    }
+    if (mpWindow->GetKeyState('D'))
+    {
+        mCamera.Pan(deltaTime, 0.0f);
+    }
+    if (mpWindow->GetKeyState(VK_UP))
+    {
+        mCamera.Orbit(0.0f, -deltaTime / 8.0f);
+    }
+    if (mpWindow->GetKeyState(VK_DOWN))
+    {
+        mCamera.Orbit(0.0f, deltaTime / 8.0f);
+    }
+    if (mpWindow->GetKeyState(VK_LEFT))
+    {
+        mCamera.Orbit(-deltaTime / 8.0f, 0.0f);
+    }
+    if (mpWindow->GetKeyState(VK_RIGHT))
+    {
+        mCamera.Orbit(deltaTime / 8.0f, 0.0f);
+    }
+}
+
+void Renderer::OnMouseMoveInput()
+{
+    static float lastX;
+    static float lastY;
+    float xOffset = (mpWindow->GetMousePosX() - lastX);
+    float yOffset = (mpWindow->GetMousePosY() - lastY);
+    if (mpWindow->GetButtonState(VK_LBUTTON)) {
+        mCamera.Orbit(xOffset, yOffset);
+    }
+    if (mpWindow->GetButtonState(VK_RBUTTON)) {
+        mCamera.Pan(xOffset, yOffset);
+    }
+    mCamera.Dolly(mpWindow->GetDeltaZ());
+    mpWindow->SetDeltaZ(0);
+    lastX = mpWindow->GetMousePosX();
+    lastY = mpWindow->GetMousePosY();
+}

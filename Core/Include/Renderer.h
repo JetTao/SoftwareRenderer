@@ -6,6 +6,7 @@
 #include "HighResolutionClock.h"
 #include "Model.h"
 #include "Vertex.h"
+#include "../../Shaders/BaseShader.h"
 
 #include <vector>
 #include <unordered_map>
@@ -29,9 +30,6 @@ public:
         , mCamera(mWidth, mHeight)
         , mProjectPath(path) {}
 
-    void SetVertexBuffer(std::vector<Vec3f>& vertexBuffer);
-    
-    void SetIndexBuffer(std::vector<uint32_t>& indexBuffer);
 
     void SetWindowPointer(Window* pWindow)
     {
@@ -48,20 +46,16 @@ public:
 
 private:
 
-
-void OnKeyboardInput();
-
-void OnMouseMoveInput();
-
-
-void DrawModel(std::shared_ptr<Model> pModel);
+void DrawModel(
+    std::shared_ptr<Model> pModel,
+    std::shared_ptr<BaseShader> pShader);
 
 void DrawPixel(uint32_t x, uint32_t y, const ARGB &color);
 
 void DrawLine(Point2f point0, Point2f point1, const ARGB &color);
 
 void DrawTriangle(
-    std::shared_ptr<BlinPhongShader> pShader,
+    std::shared_ptr<BaseShader> pShader,
     std::array<Vertex, 3>& triangle);
 
 void DrawWireFrameTriangle(
@@ -81,24 +75,30 @@ bool CullBackface(
     const Point4f& point1,
     const Point4f& point2);
 
-std::vector<std::array<Vertex, 3>> Clip(std::vector<Vertex>& vertices);
+std::vector<std::array<Vertex, 3>> Clip(
+    const std::array<Vertex, 3>& triangle
+);
 
 bool ClipSpaceCull(
-    const Vec4f &point1,
-    const Vec4f &pointt2,
-    const Vec4f &point3);
+    const Point4f &point1,
+    const Point4f &pointt2,
+    const Point4f &point3);
 
-bool IsInsidePlane(Vec4f &clipCoords, uint32_t PLANE);
+bool IsInsidePlane(Point4f &clipPoint, uint32_t PLANE);
 
 float GetIntersectionFactor(
-    Vec4f &previousVertex, 
-    Vec4f &currentVertex, 
+    Point4f &previousPoint, 
+    Point4f &currentPoint, 
     uint32_t PLANE);
 
 void ClipPolygonAgainstPlane(
     std::vector<Vertex> &inputVertices,
     std::vector<Vertex> &outputVertices,
     uint32_t PLANE);
+
+void OnKeyboardInput();
+
+void OnMouseMoveInput();
 
 private:
 
@@ -129,3 +129,4 @@ private:
     std::unordered_map<std::string, std::shared_ptr<Model>> mModels;
 
 };
+

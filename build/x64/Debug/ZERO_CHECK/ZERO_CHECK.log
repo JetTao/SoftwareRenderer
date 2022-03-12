@@ -1,7 +1,0 @@
-﻿  Checking Build System
-  CMake is re-running because generate.stamp.list is missing.
-  -- Configuring done
-  -- Generating done
-  -- Build files have been written to: D:/CodeDirectory/SoftwareRenderer/build
-C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(245,5): warning MSB8064: 项“D:\CodeDirectory\SoftwareRenderer\build\CMakeFiles\331fc98c35d35cf312bc105ca178df1f\generate.stamp.rule”的自定义生成成功，但指定的依赖项“d:\codedirectory\softwarerenderer\build\cmakefiles\331fc98c35d35cf312bc105ca178df1f\generate.stamp.rule”不存在。这可能会导致增量生成无法正常工作。
-C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(245,5): warning MSB8065: 项“D:\CodeDirectory\SoftwareRenderer\build\CMakeFiles\331fc98c35d35cf312bc105ca178df1f\generate.stamp.rule”的自定义生成成功，但尚未创建指定的输出“d:\codedirectory\softwarerenderer\build\cmakefiles\generate.stamp”。这可能会导致增量生成无法正常工作。

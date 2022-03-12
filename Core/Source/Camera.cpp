@@ -9,19 +9,17 @@ static constexpr float R_MOUSEMOVE_SENSITIVITY { 0.05f };
 Camera::Camera(
     uint32_t width,
     uint32_t height,
-    Point3f origin,
+    Point3f position,
     Point3f target, 
     Vec3f up,
-    float aspectRatio,
     float fov,
     float zNear,
     float zFar)
     : mWidth(width)
     , mHeight(height)
-    , Origin(origin)
+    , Position(position)
     , Target(target)
     , Up(up)
-    , mAspectRatio(aspectRatio)
     , mFOV(fov)
     , mZNear(zNear)
     , mZFar(zFar)
@@ -35,7 +33,7 @@ void Camera::Reset()
     mZFar  = 100.0f;
     mFOV   = 45.0f;    
 
-    Origin = Vec3f{ 0.0f, 0.0f, 10.0f };
+    Position = Vec3f{ 0.0f, 0.0f, 5.0f };
     Target = Vec3f{ 0.0f, 0.0f, 0.0f };
     Up     = Vec3f{ 0.0f, 1.0f, 0.0f };
 
@@ -44,9 +42,9 @@ void Camera::Reset()
 
 void Camera::Orbit(float xOffset, float yOffset)
 {
-    float radius = VectorLength(Origin);        //Spherical coordinate system
-    float theta  = acos(Origin.y / radius);    //ISO convention
-    float phi    = atan2(Origin.x , Origin.z);
+    float radius = VectorLength(Position);        //Spherical coordinate system
+    float theta  = acos(Position.y / radius);    //ISO convention
+    float phi    = atan2(Position.x , Position.z);
 
     float sensitivity = 1.0f / mHeight * 2 * PI;
 
@@ -56,9 +54,9 @@ void Camera::Orbit(float xOffset, float yOffset)
     theta = std::min(theta, PI - EPSILON);
     theta = std::max(theta, EPSILON);
 
-    Origin.x = radius * sin(theta) * sin(phi);
-    Origin.y = radius * cos(theta);
-    Origin.z = radius * sin(theta) * cos(phi);
+    Position.x = radius * sin(theta) * sin(phi);
+    Position.y = radius * cos(theta);
+    Position.z = radius * sin(theta) * cos(phi);
 
     UpdateCameraVectors();
 
@@ -66,7 +64,7 @@ void Camera::Orbit(float xOffset, float yOffset)
 
 void Camera::Pan(float xOffset, float yOffset)
 {
-    float targetDistance = VectorLength(Target - Origin);
+    float targetDistance = VectorLength(Target - Position);
     float moveDistance = targetDistance * tan(Radians(mFOV / 2));
     float sensitivity = 1.0f / mHeight * moveDistance;
 
@@ -78,53 +76,27 @@ void Camera::Pan(float xOffset, float yOffset)
 
 void Camera::Dolly(float zOffset)
 {
-    // if (Origin == Target) {
-    //     return;
-    // }
-    Origin += Gaze * zOffset;
+    Position += Gaze * zOffset;
 
     UpdateCameraVectors();
 }
 
-// void Camera::ProcessKeyboard(CameraMovement direction, int deltaTime)
-// {
-//     float displacement = deltaTime * KEYBOARD_SPEED;
-
-//     switch(direction) {
-//         case CameraMovement::FORWARD: 
-//             Origin += Gaze  * displacement; 
-//             break;
-//         case CameraMovement::BACKWARD: 
-//             Origin -= Gaze  * displacement; 
-//             break;
-//         case  CameraMovement::LEFT: 
-//             Origin -= Right * displacement; 
-//             break;
-//         case CameraMovement::RIGHT: 
-//             Origin += Right * displacement; 
-//             break;
-//         default: 
-//             break;
-//     }
-//     UpdateCameraVectors();
-// }
-
 void Camera::UpdateCameraVectors()
 {
-    Gaze   = Normalize(Target - Origin);
+    Gaze   = Normalize(Target - Position);
     Right  = Normalize(Cross(Gaze, Up));
 }
 
 void Camera::PrintInfomation()
 {
-    std::cout << "Origin: " << Origin 
+    std::cout << "Position: " << Position 
               << "Gaze: " << Gaze 
               << "Right: " << Right << std::endl;
 }
 
 Mat4f Camera::GetViewMatrix() const
 {
-    return LookAt(Origin, Gaze, Up);
+    return LookAt(Position, Gaze, Up);
 }
 
 Mat4f Camera::GetPerspectiveMatrix() const

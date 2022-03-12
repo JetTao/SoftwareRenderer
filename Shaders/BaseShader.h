@@ -4,9 +4,9 @@
 
 struct BaseShader
 {
-    virtual Vertex& VertexShader(Vertex& in) = 0;
+    virtual bool VertexShader(Vertex& position) = 0;
     
-    virtual Color4f FragmentShader(Fragment& in) = 0;
+    virtual bool FragmentShader(Fragment& fragment) = 0;
 
     virtual ~BaseShader() = default;
 };

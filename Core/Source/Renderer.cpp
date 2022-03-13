@@ -67,7 +67,7 @@ void Renderer::OnRender()
     
     Point3f lightPosition{ 0, 0.0f, 100.0f };
 
-    BlinPhongShader::DirectionLight light{
+    BlinPhongShader::PointLight light{
         Point3f{ lightPosition },
         Color3f{ 0.2f, 0.2f, 0.2f },
         Color3f{ 0.5f, 0.5f, 0.5f },

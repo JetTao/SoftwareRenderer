@@ -12,7 +12,7 @@ struct BlinPhongShader : BaseShader
 public:
 
 
-    struct DirectionLight
+    struct PointLight
     {
         Point3f Position;
         Vec3f   Ambient;
@@ -57,7 +57,7 @@ public:
     
 public:
 
-    DirectionLight Light;
+    PointLight Light;
 
     Mat4f Model;
 

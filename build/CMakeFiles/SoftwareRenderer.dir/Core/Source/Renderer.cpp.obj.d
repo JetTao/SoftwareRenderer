@@ -491,4 +491,5 @@ CMakeFiles/SoftwareRenderer.dir/Core/Source/Renderer.cpp.obj: \
   D:\CodeDirectory\SoftwareRenderer\Core\Source\..\Include\..\..\Shaders\..\Core\\Include\Vertex.h \
   D:\CodeDirectory\SoftwareRenderer\Core\Source\..\Include\..\..\Shaders\..\Core\Include\Math.hpp \
   D:\CodeDirectory\SoftwareRenderer\Core\Source\..\Include\..\..\Shaders\..\Core\Include\Texture.h \
-  C:\Program\ Files\llvm-mingw-20211002-msvcrt-x86_64\include\c++\v1\array
+  C:\Program\ Files\llvm-mingw-20211002-msvcrt-x86_64\include\c++\v1\array \
+  C:\Program\ Files\llvm-mingw-20211002-msvcrt-x86_64\include\omp.h

@@ -33,7 +33,7 @@ void Camera::Reset()
     mZFar  = 100.0f;
     mFOV   = 45.0f;    
 
-    Position = Vec3f{ 0.0f, 0.0f, 5.0f };
+    Position = Vec3f{ 0.0f, 0.0f, 10.0f };
     Target = Vec3f{ 0.0f, 0.0f, 0.0f };
     Up     = Vec3f{ 0.0f, 1.0f, 0.0f };
 

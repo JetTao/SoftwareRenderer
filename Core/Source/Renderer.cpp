@@ -11,10 +11,10 @@
 void Renderer::LoadScene(void)
 {
     
-    fs::path crabPath = mProjectPath / "Scenes/back_pack/back_pack.obj";
+    fs::path crabPath = mProjectPath / "Scenes/crab/crab.obj";
     auto pCrabModel = std::make_shared<Model>(crabPath);
 
-    mModels["back_pack"] = pCrabModel;
+    mModels["crab"] = pCrabModel;
 }
 
 
@@ -65,7 +65,14 @@ void Renderer::OnRender()
 
     static float theta = 0;
     
+
     Point3f lightPosition{ 0, 0.0f, 100.0f };
+    model = Rotate(model, theta, Vec3f{ 0.0f, 1.0f, 0.0f });
+    lightPosition = model * Point4f{ lightPosition, 1.0f };
+
+    theta += mTimer.GetDeltaMilliseconds() * 0.1f ;
+
+    model = Mat4f::GetIdentity();
 
     BlinPhongShader::PointLight light{
         Point3f{ lightPosition },
@@ -74,7 +81,7 @@ void Renderer::OnRender()
         Color3f{ 1.0f, 1.0f, 1.0f }
     };
 
-    auto pBackPackModel = mModels["back_pack"];
+    auto pBackPackModel = mModels["crab"];
 
     auto pBackPackShader = std::make_shared<BlinPhongShader>();
 
@@ -128,6 +135,13 @@ void Renderer::DrawModel(
             }
         }
 
+            if (CullBackface(
+                triangle[0].Position,
+                triangle[1].Position,
+                triangle[2].Position))
+            {
+                continue;
+            }
 
         for (auto &&vertex : triangle) 
         {
@@ -135,13 +149,6 @@ void Renderer::DrawModel(
             vertex.RHW = 1.0f / vertex.Position.w;
         }
 
-        if (CullBackface(
-            triangle[0].Position,
-            triangle[1].Position,
-            triangle[2].Position))
-        {
-            continue;
-        }
         auto triangles = Clip(triangle);
 
         for (auto &&triangle : triangles) 

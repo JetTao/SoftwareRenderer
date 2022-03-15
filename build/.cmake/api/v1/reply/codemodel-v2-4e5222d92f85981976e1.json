@@ -9,7 +9,7 @@
 					"jsonFile" : "directory-.-Release-d0094a50bb2071803777.json",
 					"minimumCMakeVersion" : 
 					{
-						"string" : "3.0.0"
+						"string" : "3.2.4"
 					},
 					"projectIndex" : 0,
 					"source" : ".",
@@ -39,7 +39,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "SoftwareRenderer::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-SoftwareRenderer-Release-dd9a9f009ef0e7666790.json",
+					"jsonFile" : "target-SoftwareRenderer-Release-3110e24d5d610e4abf94.json",
 					"name" : "SoftwareRenderer",
 					"projectIndex" : 0
 				}

@@ -35,14 +35,14 @@ public:
         // Vec3f normal = Normalize(pNormalMap->GetTexel(fragment.TexCoord));
         Vec3f normal = Normalize((fragment.Normal));
         Vec3f lightDirection = Normalize(Light.Position - FragPosition);
-        float lightStrength = Max( Dot(normal, lightDirection), 0.0f );
+        float lightStrength = std::max( Dot(normal, lightDirection), 0.0f );
 
         Color3f diffuse = Light.Diffuse * pDiffuseMap->GetTexel(fragment.TexCoord)
             * lightStrength;
 
         Vec3f viewDirection = Normalize(ViewPosition - FragPosition);
         auto halfDirection = Normalize(lightDirection + viewDirection);
-        float exp = std::pow( Max( Dot(normal, halfDirection ), 0.0f ), 64.0f );
+        float exp = std::pow( std::max( Dot(normal, halfDirection ), 0.0f ), 64.0f );
 
         Vec3f specular = Light.Specular * exp * 
             pSpecularMap->GetTexel(fragment.TexCoord);

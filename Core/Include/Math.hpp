@@ -895,8 +895,3 @@ inline Mat4f Perspective(const float fov, const float aspect, const float n, con
     return mat;
 }
 
-
-static float Max(const float& lhs, const float& rhs)
-{
-    return lhs > rhs ? lhs : rhs;
-}

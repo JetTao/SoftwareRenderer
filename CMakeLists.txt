@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0.0)
+cmake_minimum_required(VERSION 3.2.4)
 project(SoftwareRenderer VERSION 0.1.0)
 
 include_directories(${PROJECT_SOURCE_DIR}/Parser)
@@ -10,6 +10,7 @@ file(GLOB SOURCE_FILES
     "Parser/*.h"
     "Shaders/*.h")
 
+    
 add_executable(SoftwareRenderer main.cpp ${SOURCE_FILES})
 
 set_target_properties(SoftwareRenderer PROPERTIES
